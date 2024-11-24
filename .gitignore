@@ -1,30 +1,51 @@
-# Prerequisites
-*.d
+# Ignore build directories
+/build/
+/bin/
+/obj/
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Ignore the IDE specific files (for Visual Studio, if using it)
+.vs/
+.vscode/
+.idea/
 
-# Precompiled Headers
-*.gch
-*.pch
+# Ignore compiled binary files
+*.exe
+*.out
+*.app
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# Ignore temporary files created by the system or the editor
+*.log
+*.tmp
+*.swp
+*.bak
 
-# Fortran module files
-*.mod
-*.smod
+# Ignore dependency directories
+/third_party/
+extern/
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+# Ignore CMake or other build system files if using CMake
+CMakeCache.txt
+CMakeFiles/
+Makefile
+Makefile.in
+*.cmake
+
+# Ignore package manager files (e.g., for vcpkg, if used)
+/vcpkg/
+
+# Ignore generated files from IDEs
+*.user
+*.userprefs
+
+# Ignore Mac OS system files
+.DS_Store
+
+# Ignore Linux system files
+*~
+
+# Ignore Windows system files
+Thumbs.db
+
 
 # Executables
 *.exe
