@@ -19,10 +19,6 @@
 *.swp
 *.bak
 
-# Ignore dependency directories
-/third_party/
-extern/
-
 # Ignore CMake or other build system files if using CMake
 CMakeCache.txt
 CMakeFiles/
