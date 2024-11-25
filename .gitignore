@@ -3,7 +3,7 @@
 /bin/
 /obj/
 
-# Ignore the IDE specific files (for Visual Studio, if using it)
+# Ignore the IDE specific files (for Visual Studio)
 .vs/
 .vscode/
 .idea/
@@ -41,7 +41,6 @@ Makefile.in
 
 # Ignore Windows system files
 Thumbs.db
-
 
 # Executables
 *.exe
