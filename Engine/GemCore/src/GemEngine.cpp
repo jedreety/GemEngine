@@ -66,6 +66,9 @@ namespace Gem {
             vkDestroyInstance(instance_, nullptr);
             instance_ = VK_NULL_HANDLE;
         }
+
+		// Terminate GLFW
+		GLFWManager::getInstance().terminateGLFW();
     }
 
     VkInstance GemEngine::getInstanceHandle() const noexcept {

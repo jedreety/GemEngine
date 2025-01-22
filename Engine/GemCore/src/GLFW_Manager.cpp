@@ -23,9 +23,7 @@ namespace Gem {
         std::lock_guard<std::mutex> lock(mutex_);
         --refCount_;
         Logger::debug("GLFWManager: refCount decremented to {}", refCount_);
-        if (refCount_ <= 0) {
-            terminateGLFW();
-        }
+
     }
 
     void GLFWManager::initGLFW() {

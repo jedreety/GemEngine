@@ -34,6 +34,11 @@ namespace Gem {
         void initGLFW();
 
         /**
+         * @brief Terminates GLFW if initialized.
+         */
+        void terminateGLFW();
+
+        /**
          * @brief Increments the reference count for GLFW usage.
          *
          * If GLFW is not yet initialized, it initializes it.
@@ -50,12 +55,6 @@ namespace Gem {
     private:
         GLFWManager() = default;  ///< Private constructor to ensure singleton usage.
         ~GLFWManager() = default; ///< Private destructor.
-
-
-        /**
-         * @brief Terminates GLFW if initialized.
-         */
-        void terminateGLFW();
 
     private:
         std::mutex mutex_;      ///< Mutex to guard refCount_ and init/terminate operations.
