@@ -29,6 +29,11 @@ namespace Gem {
         GLFWManager& operator=(GLFWManager&&) = delete;
 
         /**
+         * @brief Initializes GLFW.
+         */
+        void initGLFW();
+
+        /**
          * @brief Increments the reference count for GLFW usage.
          *
          * If GLFW is not yet initialized, it initializes it.
@@ -46,10 +51,6 @@ namespace Gem {
         GLFWManager() = default;  ///< Private constructor to ensure singleton usage.
         ~GLFWManager() = default; ///< Private destructor.
 
-        /**
-         * @brief Initializes GLFW if not already initialized.
-         */
-        void initGLFW();
 
         /**
          * @brief Terminates GLFW if initialized.

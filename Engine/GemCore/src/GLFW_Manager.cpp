@@ -32,20 +32,20 @@ namespace Gem {
         if (initialized_) {
             return;
         }
-        Logger::info("Initializing GLFW...");
+        Logger::debug("Initializing GLFW...");
         if (!glfwInit()) {
             Logger::error("Failed to initialize GLFW!");
             throw std::runtime_error("Failed to initialize GLFW!");
         }
         initialized_ = true;
-        Logger::info("GLFW initialized successfully.");
+        Logger::debug("GLFW initialized successfully.");
     }
 
     void GLFWManager::terminateGLFW() {
         if (!initialized_) {
             return;
         }
-        Logger::info("Terminating GLFW.");
+        Logger::debug("Terminating GLFW.");
         glfwTerminate();
         initialized_ = false;
     }

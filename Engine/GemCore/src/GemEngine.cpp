@@ -1,4 +1,5 @@
 #include <Gem/Core/GemEngine.h>
+#include <Gem/Core/GLFW_Manager.h>
 #include <Gem/Core/Logger.h>
 
 #include <GLFW/glfw3.h>  // for glfwGetRequiredInstanceExtensions
@@ -41,7 +42,10 @@ namespace Gem {
             return;
         }
 
-        Logger::info("Initializing Vulkan...");
+		// Initialise GLFW
+		GLFWManager::getInstance().initGLFW();
+
+        Logger::debug("Initializing Vulkan...");
         createInstance();
 
         // Optional: Setup debug messenger if validation is enabled
@@ -49,7 +53,7 @@ namespace Gem {
             setupDebugMessenger();
         }
 
-        Logger::info("Vulkan initialized successfully.");
+        Logger::debug("Vulkan initialized successfully.");
     }
 
     GemEngine::~GemEngine() {
@@ -58,7 +62,7 @@ namespace Gem {
         }
 
         if (instance_ != VK_NULL_HANDLE) {
-            Logger::info("Destroying Vulkan instance.");
+            Logger::debug("Destroying Vulkan instance.");
             vkDestroyInstance(instance_, nullptr);
             instance_ = VK_NULL_HANDLE;
         }
@@ -142,7 +146,7 @@ namespace Gem {
             Logger::error("Failed to create Vulkan instance (error code: {})", result);
             throw std::runtime_error("Failed to create Vulkan instance.");
         }
-        Logger::info("Vulkan instance created successfully.");
+        Logger::debug("Vulkan instance created successfully.");
     }
 
     void GemEngine::setupDebugMessenger() {
@@ -180,7 +184,7 @@ namespace Gem {
             Logger::warning("Failed to create debug messenger!");
         }
         else {
-            Logger::info("Debug messenger created successfully.");
+            Logger::debug("Debug messenger created successfully.");
         }
     }
 
