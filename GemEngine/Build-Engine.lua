@@ -1,4 +1,5 @@
 project "GemEngine"
+   location( _SCRIPT_DIR )
    kind "StaticLib"
    language "C++"
    cppdialect "C++20"

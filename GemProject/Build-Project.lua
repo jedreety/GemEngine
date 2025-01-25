@@ -1,4 +1,5 @@
 project "GemProject"
+   location( _SCRIPT_DIR )
    kind "ConsoleApp"
    language "C++"
    cppdialect "C++20"

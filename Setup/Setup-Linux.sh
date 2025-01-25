@@ -1,5 +1,3 @@
 #!/bin/bash
 
-pushd ..
-Setup/Vendor/Binaries/Premake/Linux/premake5 --cc=clang --file=Build.lua gmake2
-popd
+Vendor/Binaries/Premake/Linux/premake5 --cc=clang --file=PremakeScript/Build.lua gmake2

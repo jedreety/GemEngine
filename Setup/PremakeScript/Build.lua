@@ -1,5 +1,6 @@
 -- premake5.lua
 workspace "GemEngine"
+   location ("../../")
    architecture "x64"
    configurations { "Debug", "Release", "Dist" }
    startproject "GemProject"
@@ -11,7 +12,7 @@ workspace "GemEngine"
 OutputDir = "%{cfg.system}-%{cfg.architecture}/%{cfg.buildcfg}"
 
 group "Engine"
-	include "GemEngine/Build-Engine.lua"
+	include "../../GemEngine/Build-Engine.lua"
 group ""
 
-include "GemProject/Build-Project.lua"
+include "../../GemProject/Build-Project.lua"
