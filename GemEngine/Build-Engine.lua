@@ -10,9 +10,17 @@ files {
 
     "GemCore/include/Gem/Core/**.h",
     "GemCore/include-protected/**.h",
-    
     "GemCore/src/**.cpp",
 
+    "GemWindow/include/Gem/Window/**.h",
+    "GemWindow/include-protected/**.h",
+    "GemWindow/src/**.cpp",
+
+    "GemGraphics/include/Gem/Graphics/**.h",
+    "GemGraphics/include-protected/**.h",
+    "GemGraphics/src/**.cpp",
+
+    "C:/stb/stb_image.cpp",
     "C:/glad/src/glad.c"
 }
 
@@ -21,8 +29,16 @@ includedirs
     "GemCore/include",
     "GemCore/include-protected",
 
+    "GemWindow/include",
+    "GemWindow/include-protected",
+
+    "GemGraphics/include",
+    "GemGraphics/include-protected",
+
     "C:/glfw-3.4/include",
-    "C:/glad/include"
+    "C:/glad/include",
+    "C:/glm-1.0.1",
+    "C:/stb"
 }
 
 libdirs {

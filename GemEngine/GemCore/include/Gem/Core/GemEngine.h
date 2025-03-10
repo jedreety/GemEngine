@@ -51,6 +51,25 @@ namespace Gem {
          */
         bool isInitialized() const;
 
+        /**
+         * @brief Checks if the engine is running.
+         *
+         * This function is used to control the main game loop. The loop should
+         * continue running as long as this function returns true.
+         *
+         * @return true if the engine is running, false otherwise.
+         */
+        bool isRunning();
+
+        /**
+         * @brief Exits the main loop and shuts down the engine.
+         *
+         * This function signals the engine to exit the main loop, cleans up
+         * all resources, and terminates the program. After calling this,
+         * isRunning() will return false.
+         */
+        void exit();
+
     private:
         GemEngine() = default;  ///< Private constructor to ensure singleton usage.
         ~GemEngine() = default; ///< Private destructor.
@@ -66,6 +85,7 @@ namespace Gem {
 
         std::mutex mutex_;      ///< Mutex to guard initialization and shutdown operations.
         bool initialized_ = false; ///< Flag indicating if the engine is initialized.
+        bool running_ = false;      ///< Flag indicating if the engine is running.
     };
 
 } // namespace Gem

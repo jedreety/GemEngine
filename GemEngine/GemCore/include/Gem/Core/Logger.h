@@ -17,7 +17,17 @@
  * 3 = Error
  */
 #ifndef GEMENGINE_MIN_LOG_LEVEL
-#define GEMENGINE_MIN_LOG_LEVEL 0
+
+    #ifdef DIST
+        #define GEMENGINE_MIN_LOG_LEVEL 3
+
+    #elif defined(RELEASE)
+        #define GEMENGINE_MIN_LOG_LEVEL 2
+
+    #else
+        #define GEMENGINE_MIN_LOG_LEVEL 0
+        
+    #endif
 #endif
 
 namespace Gem {

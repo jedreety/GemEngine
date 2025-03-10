@@ -1,7 +1,6 @@
 #pragma once
 
 #define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
 #include <mutex>
 
 namespace Gem {
@@ -39,11 +38,6 @@ namespace Gem {
          */
         void terminateGLFW();
 
-
-    private:
-        GLFWManager() = default;  ///< Private constructor to ensure singleton usage.
-        ~GLFWManager() = default; ///< Private destructor.
-
         /**
          * @brief Increments the reference count for GLFW usage.
          *
@@ -57,6 +51,10 @@ namespace Gem {
          * If the reference count hits zero, GLFW is terminated.
          */
         void decrementRefCount();
+
+    private:
+        GLFWManager() = default;  ///< Private constructor to ensure singleton usage.
+        ~GLFWManager() = default; ///< Private destructor.
 
     private:
         std::mutex mutex_;      ///< Mutex to guard refCount_ and init/terminate operations.

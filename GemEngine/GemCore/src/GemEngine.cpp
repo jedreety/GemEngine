@@ -1,8 +1,9 @@
 #include <Gem/Core/GemEngine.h>
 #include <GLFW_Manager.h>
 #include <Gem/Core/Logger.h>
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+
+#include <function_overload.h>
+
 #include <stdexcept>
 
 namespace Gem {
@@ -33,6 +34,7 @@ namespace Gem {
         }
 
         initialized_ = true;
+		running_ = true;
         Logger::debug("GemEngine: Initialized successfully.");
 
         return true;
@@ -60,38 +62,74 @@ namespace Gem {
         return initialized_;
     }
 
-    bool GemEngine::initOpenGL() {
-        // This assumes GLFW has been initialized and a context has been created
-        // In a real implementation, you might want to create a temporary window for context
-        // or handle this differently depending on your architecture
+    bool GemEngine::isRunning() {
+
+        std::lock_guard<std::mutex> lock(mutex_);
+        return running_;
+    }
+
+    void GemEngine::exit() {
         
-        // For now, we'll assume the context is created elsewhere before calling this
-        // This is just a placeholder for actual OpenGL initialization
+        std::lock_guard<std::mutex> lock(mutex_);
+        
+        if (running_) {
+            shutdown(); // Clean up resources
+            running_ = false; // Signal the engine to stop running
+        }
+    }
+
+
+    bool GemEngine::initOpenGL() {
 
 		Gem::GLFWManager::getInstance().initGLFW();
         
         Logger::debug("GemEngine: Initializing OpenGL...");
-        
-        // In a real implementation, you would initialize GLAD or another OpenGL loader here
-        // For example:
+
+		Gem::GLFW::set_context_version(4, 6);
+		Gem::GLFW::set_openGL_profile(GLFW_OPENGL_CORE_PROFILE);
         
         // Create temporary window for OpenGL context
-        GLFWwindow* tempWindow = glfwCreateWindow(1, 1, "Temp Window", nullptr, nullptr);
+        GLFWwindow* tempWindow = Gem::GLFW::create_window(1, 1, "Temp Window");
         if (!tempWindow) {
             Logger::error("Failed to create temporary GLFW window!");
             return false;
         }
-        glfwMakeContextCurrent(tempWindow);
+        Gem::GLFW::make_context_current(tempWindow);
 
         // Initialize GLAD
-        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        if (!Gem::GLAD::init()) {
+
             Logger::error("Failed to initialize GLAD!");
             glfwDestroyWindow(tempWindow);
             return false;
         }
 
+        bool depth_test = true;
+        bool cull_face = true;
+        bool blending = true;
+        bool multisampling = true;
+
+        depth_test ? glEnable(GL_DEPTH_TEST) : glDisable(GL_DEPTH_TEST);
+
+        if (cull_face) {
+            glEnable(GL_CULL_FACE);
+            glCullFace(GL_BACK);
+            glFrontFace(GL_CW);
+        }
+        else 
+            glDisable(GL_CULL_FACE);
+
+        if (blending) {
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        }
+        else 
+            glDisable(GL_BLEND);
+
+        multisampling ? glEnable(GL_MULTISAMPLE) : glDisable(GL_MULTISAMPLE);
+
         // Cleanup temporary window
-        glfwDestroyWindow(tempWindow);
+        Gem::GLFW::destroy_window(tempWindow);
         Logger::debug("GemEngine: OpenGL initialized successfully.");
         return true;
     }

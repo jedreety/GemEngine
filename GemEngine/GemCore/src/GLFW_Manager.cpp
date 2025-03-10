@@ -1,4 +1,5 @@
 #include <GLFW_Manager.h>
+#include <function_overload.h>
 #include <Gem/Core/Logger.h>
 #include <stdexcept>
 
@@ -30,6 +31,10 @@ namespace Gem {
         --refCount_;
         Logger::debug("GLFWManager: refCount decremented to {}", refCount_);
 
+        // If reference count reaches zero, terminate GLFW
+        if (refCount_ <= 0) {
+            terminateGLFW();
+        }
     }
 
     void GLFWManager::initGLFW() {
@@ -40,7 +45,7 @@ namespace Gem {
 
         Logger::debug("Initializing GLFW...");
 
-        if (!glfwInit()) {
+        if (!Gem::GLFW::init()) {
 
             Logger::error("Failed to initialize GLFW!");
             throw std::runtime_error("Failed to initialize GLFW!");
@@ -58,7 +63,7 @@ namespace Gem {
 
         Logger::debug("Terminating GLFW.");
 
-        glfwTerminate();
+		Gem::GLFW::terminate();
         initialized_ = false;
     }
 

@@ -13,9 +13,17 @@ project "GemProject"
 
 	  -- Include Core
       "../GemEngine/GemCore/include",
+
+      -- Include Window
+      "../GemEngine/GemWindow/include",
+
+        -- Include Graphics
+        "../GemEngine/GemGraphics/include",
    
         "C:/glfw-3.4/include",
-        "C:/glad/include"
+        "C:/glad/include",
+        "C:/glm-1.0.1",
+        "C:/stb"
    }
   
    libdirs {
